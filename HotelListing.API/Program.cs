@@ -1,3 +1,4 @@
+using HotelListing.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -5,8 +6,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-var connectionString = builder.Configuration.GetConnectionString("HotelLIstingDbConnectionString");
+// The connection string that connects our program to the database
+var connectionString = builder.Configuration.GetConnectionString("HotelListingsDbConnectionString");
+
+// Creates a database context that represents the connection to the database; An object that will run as a bridge to the database
+
 builder.Services.AddDbContext<HotelListingDbContext>(options => {
+    // Tells the context which type of database it is and takes the connection string as an argument
     options.UseSqlServer(connectionString);
 });
 
